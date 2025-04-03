@@ -1,12 +1,12 @@
-const express = require("express");
-const moment = require("moment-timezone");
+// Tarayıcıdan çağrıldığında JSON döndüren basit bir API
+document.addEventListener("DOMContentLoaded", function () {
+    const currentTime = new Date().toLocaleString("tr-TR", { timeZone: "Europe/Istanbul" });
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+    const response = {
+        timezone: "Europe/Istanbul",
+        time: currentTime
+    };
 
-app.get("/time", (req, res) => {
-    const currentTime = moment().tz("Europe/Istanbul").format("YYYY-MM-DD HH:mm:ss");
-    res.json({ timezone: "Europe/Istanbul", time: currentTime });
+    // Sayfada JSON göster
+    document.body.innerHTML = `<pre>${JSON.stringify(response, null, 4)}</pre>`;
 });
-
-app.listen(PORT, () => console.log(`TimeZone API running on port ${PORT}`));
